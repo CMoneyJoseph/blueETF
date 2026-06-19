@@ -278,7 +278,7 @@ function renderMomo(){
     const sub=def.sort==='ytd'?`規模 ${d.size==null?'—':fmt(d.size)+'億'}`:`今年以來 ${ytd==null?'—':(ytd>0?'+':'')+ytd+'%'}`;
     return `<div class="etf" onclick="openSheet('${d.cd}')">
       <div class="rkbadge ${i<3?'top':''}">${i+1}</div>
-      <div class="mid"><div class="nm">${d.nm}</div><div class="cd">${d.cd} · ${d.type} · ${d.region}</div>
+      <div class="mid"><div class="nm">${d.nm} <span style="font-size:12px;font-weight:800;color:var(--txt)">$${d.px}</span></div><div class="cd">${d.cd} · ${d.type} · ${d.region}</div>
         <div style="font-size:10.5px;color:var(--sub);margin-top:3px">${sub}</div></div>
       <div class="big"><div class="v" style="color:${col}">${main}</div><div class="l">${mlbl}</div></div>
     </div>`;
@@ -458,7 +458,7 @@ function renderWatch(){
   document.getElementById('holdList').innerHTML=E.map(e=>`
     <div class="etf">
       <div class="mid"><div class="nm">${e.nm} <span style="font-size:10px;color:var(--sub);font-weight:600">${e.cd}·${e.kind}·${e.freq}</span></div>
-        <div style="font-size:11.5px;color:var(--txt);margin-top:3px">${e.lots} 張 × 年配 ${e.cash} 元 → 年領息 <b style="color:var(--brand)">$${fmt(e.annual)}</b></div>
+        <div style="font-size:11.5px;color:var(--txt);margin-top:3px">現價 $${e.px}｜${e.lots} 張 × 年配 ${e.cash} 元 → 年領息 <b style="color:var(--brand)">$${fmt(e.annual)}</b></div>
         <div style="font-size:10.5px;color:var(--sub);margin-top:2px">${e.ex?`🗓 除息 ${fmtMD(e.ex)}（${e.exD>=0?'倒數 '+e.exD+' 天':'已除息'}）　領息 ${fmtMD(e.pay)}${e.payD>=0?'（'+e.payD+' 天）':''}`:'除息日未公告'}</div>
       </div>
       <button onclick="removeHold('${e.cd}')" style="background:none;border:0;color:var(--sub);font-size:18px;align-self:flex-start">✕</button>
