@@ -244,6 +244,9 @@ function flipAlert(){
   if(dayFlip){const red=TWMACD.day>0;return `<div class="flipbox">🚨 加權日MACD 剛翻${red?'紅':'綠'}（第一根${red?'紅':'綠'}柱）→ ${red?'短線轉強':'📈 中週期啟動，回檔打折'}</div>`;}
   const dayNear=Math.abs(TWMACD.day)<80&&((TWMACD.day<0&&TWMACD.day>TWMACD.dayPrev)||(TWMACD.day>0&&TWMACD.day<TWMACD.dayPrev));
   if(dayNear){const toRed=TWMACD.day<0;return `<div class="flipwarn">⚠️ 日MACD ${toRed?'綠柱收斂中、接近翻紅':'紅柱轉弱中'}（${Math.round(TWMACD.day)} ← ${Math.round(TWMACD.dayPrev)}），留意短線轉折</div>`;}
+  // 週柱正值但縮口、日柱已轉空 → 短線趨弱但大方向多頭格局尚未破
+  if(TWMACD.day<0&&TWMACD.week>0&&TWMACD.week<TWMACD.weekPrev){
+    return `<div class="flipwarn">⚠️ 日柱已轉空（${Math.round(TWMACD.day)}）、週柱縮口中（+${Math.round(TWMACD.week)} ▼）→ 短線趨弱，大方向多頭格局尚未破壞</div>`;}
   return '';
 }
 const CLOCKGP=['#1f9d4d','#5cc06a','#a6dd9a','#cfd6dd','#f6b9c9','#ef7593','#e0414f'];
