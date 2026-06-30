@@ -479,26 +479,26 @@ function renderWatch(){
 // 功能5：世界盃ETF（美股ETF淨值表 前20大，依基金淨資產；資料日 2026/06/29）
 const US_LATEST='20260629';
 const USETF=[
+ {cd:'VOO',nm:'Vanguard S&P 500 ETF',nav:681.24,chg:7.91,chgpct:1.17},
  {cd:'IVV',nm:'iShares Core S&P 500 ETF',nav:744.65,chg:8.65,chgpct:1.18},
+ {cd:'VTI',nm:'Vanguard Total Stock Market ETF',nav:367.23,chg:4.21,chgpct:1.16},
  {cd:'QQQ',nm:'Invesco QQQ Trust Series I',nav:724.22,chg:15.96,chgpct:2.25},
+ {cd:'VEA',nm:'Vanguard FTSE Developed Markets ETF',nav:71,chg:0.53,chgpct:0.75},
+ {cd:'VUG',nm:'Vanguard Growth ETF',nav:84.86,chg:1.82,chgpct:2.19},
+ {cd:'VTV',nm:'Vanguard Value ETF',nav:218.61,chg:-0.04,chgpct:-0.02},
  {cd:'IEFA',nm:'iShares Core MSCI EAFE ETF',nav:96.41,chg:0.98,chgpct:1.03},
+ {cd:'BND',nm:'Vanguard Total Bond Market ETF',nav:73.68,chg:0.03,chgpct:0.04},
  {cd:'IEMG',nm:'iShares Core MSCI Emerging Markets ETF',nav:81.94,chg:0.81,chgpct:1},
+ {cd:'VXUS',nm:'Vanguard Total International Stock ETF',nav:84.96,chg:0.75,chgpct:0.89},
+ {cd:'VGT',nm:'Vanguard Information Technology ETF',nav:116.51,chg:2.28,chgpct:2},
  {cd:'GLD',nm:'SPDR Gold Shares',nav:369.51,chg:-4.2,chgpct:-1.12},
  {cd:'IWF',nm:'iShares Russell 1000 Growth ETF',nav:122.02,chg:2.91,chgpct:2.44},
  {cd:'IJH',nm:'iShares Core S&P Mid-Cap ETF',nav:76.53,chg:0.24,chgpct:0.31},
+ {cd:'VWO',nm:'Vanguard FTSE Emerging Markets ETF',nav:58.96,chg:0.72,chgpct:1.24},
  {cd:'IJR',nm:'iShares Core S&P Small Cap ETF',nav:147.3,chg:-0.31,chgpct:-0.21},
+ {cd:'VIG',nm:'Vanguard Dividend Appreciation ETF',nav:235.94,chg:1.16,chgpct:0.49},
+ {cd:'VO',nm:'Vanguard Mid-Cap ETF',nav:80.49,chg:0.47,chgpct:0.59},
  {cd:'QQQM',nm:'Invesco NASDAQ 100 ETF',nav:298.18,chg:6.57,chgpct:2.25},
- {cd:'SCHD',nm:'Schwab US Dividend Equity ETF',nav:31.93,chg:-0.17,chgpct:-0.53},
- {cd:'SGOV',nm:'iShares 0-3 Month Treasury Bond ETF',nav:100.66,chg:0.01,chgpct:0.01},
- {cd:'RSP',nm:'Invesco S&P 500 Equal Weight ETF',nav:213.02,chg:0.39,chgpct:0.18},
- {cd:'ITOT',nm:'iShares Core S&P Total U.S. Stock Market ETF',nav:163.09,chg:1.86,chgpct:1.15},
- {cd:'IWM',nm:'iShares Russell 2000 ETF',nav:298.9,chg:0,chgpct:0},
- {cd:'IWD',nm:'iShares Russell 1000 Value ETF',nav:242.85,chg:0.01,chgpct:0.01},
- {cd:'EFA',nm:'iShares MSCI EAFE ETF',nav:103.6,chg:1.07,chgpct:1.04},
- {cd:'IVW',nm:'iShares S&P 500 Growth ETF',nav:135.65,chg:2.67,chgpct:2.01},
- {cd:'SCHX',nm:'Schwab U.S. Large-Cap ETF',nav:29.22,chg:0.36,chgpct:1.25},
- {cd:'SCHF',nm:'Schwab International Equity ETF',nav:27.37,chg:0,chgpct:0},
- {cd:'IAU',nm:'iShares Gold Trust',nav:75.73,chg:-0.86,chgpct:-1.12},
 ];
 function renderWorld(){
   document.getElementById('worldList').innerHTML=USETF.map((d,i)=>{
