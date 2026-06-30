@@ -275,7 +275,7 @@ function renderClock(){
       <span style="font-size:23px;font-weight:900;color:var(--txt)">${fmt(TWIDX.px)}</span>
       <span style="font-size:13px;font-weight:800;color:${ic};margin-left:7px">${iu?'▲':'▼'} ${isg}${fmt(TWIDX.chg)}（${isg}${TWIDX.chgpct}%）</span>
     </div>
-    <div style="text-align:center;font-size:10.5px;color:var(--sub);margin-bottom:5px">加權指數收盤 · 資料日 ${dstr}</div>
+    <div style="text-align:right;font-size:10.5px;color:var(--sub);margin-bottom:5px">資料日 ${dstr}</div>
     ${flipAlert()}
     <div id="clockGaugeWrap">${clockGauge(gv)}</div>
     <div style="display:flex;justify-content:center;gap:16px;font-size:11.5px;color:var(--sub);margin-top:2px">
