@@ -294,7 +294,7 @@ function renderMomo(){
   else list=list.filter(x=>x.d.size!=null).sort((a,b)=>b.d.size-a.d.size);
   const n=list.length;
   document.getElementById('momoList').innerHTML=list.map(({d,ytd},i)=>{
-    const col=rankColor(i,n);
+    const col=def.sort==='ytd'?(ytd>=0?'var(--r2c)':'var(--g0)'):'var(--txt)';
     const main=def.sort==='ytd'?`${ytd>0?'+':''}${ytd}%`:`${fmt(d.size)}億`;
     const mlbl=def.sort==='ytd'?'今年以來':'資金規模';
     const sub=def.sort==='ytd'?`規模 ${d.size==null?'—':fmt(d.size)+'億'}`:`今年以來 ${ytd==null?'—':(ytd>0?'+':'')+ytd+'%'}`;
