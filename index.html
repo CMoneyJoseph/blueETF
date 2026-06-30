@@ -196,34 +196,34 @@ function dchg(v,sz){ if(v==null)return ''; const up=v>=0; return `<span style="f
 
 // 28 檔 ETF：資料庫真實快照(2026/06/30 收盤)。px=現價(還原), chg=當日漲跌幅%, r20/r60/r1=近20日/近60日/近一年報酬%(還原價計算), yield=近12月殖利率, size=規模億, k9=日K(9)
 const DATA=[
- {cd:'0050',nm:'元大台灣50',type:'市值',region:'台灣',px:107.8,chg:3.21,r20:2.18,r60:42.88,r1:127.67,yield:1.26,size:21536,k9:43},
- {cd:'006208',nm:'富邦台50',type:'市值',region:'台灣',px:250.2,chg:3.07,r20:2.58,r60:42.73,r1:128.64,yield:1.77,size:4421.2,k9:44},
+ {cd:'0050',nm:'元大台灣50',type:'市值',region:'台灣',px:107.8,chg:3.21,r20:2.18,r60:42.88,r1:127.67,yield:1.26,size:22101.1,k9:43},
+ {cd:'006208',nm:'富邦台50',type:'市值',region:'台灣',px:250.2,chg:3.07,r20:2.58,r60:42.73,r1:128.64,yield:1.77,size:4535.9,k9:44},
  {cd:'00692',nm:'富邦公司治理',type:'市值',region:'台灣',px:93.1,chg:2.99,r20:2.2,r60:39.89,r1:116.66,yield:2.02,size:565.6,k9:44},
- {cd:'00922',nm:'國泰台灣領袖50',type:'市值',region:'台灣',px:41.25,chg:3.12,r20:2.84,r60:47.48,r1:123.34,yield:7.88,size:827,k9:44},
+ {cd:'00922',nm:'國泰台灣領袖50',type:'市值',region:'台灣',px:41.25,chg:3.12,r20:2.84,r60:47.48,r1:123.34,yield:7.88,size:851.2,k9:44},
  {cd:'00850',nm:'元大臺灣ESG永續',type:'市值',region:'台灣',px:92.05,chg:3.14,r20:1.43,r60:48.83,r1:121.49,yield:3.2,size:381.8,k9:43},
- {cd:'00923',nm:'群益台ESG低碳50',type:'市值',region:'台灣',px:43.06,chg:3.04,r20:0.87,r60:49.77,r1:124.97,yield:6.11,size:354.2,k9:41},
- {cd:'00888',nm:'永豐台灣ESG',type:'市值',region:'台灣',px:37.99,chg:2.68,r20:6.56,r60:71.13,r1:161.28,yield:6,size:null,k9:61},
- {cd:'009816',nm:'凱基台灣TOP50',type:'市值',region:'台灣',px:15.65,chg:3.99,r20:1.62,r60:46.81,r1:null,yield:null,size:null,k9:39},
+ {cd:'00923',nm:'群益台ESG低碳50',type:'市值',region:'台灣',px:43.06,chg:3.04,r20:0.87,r60:49.77,r1:124.97,yield:6.11,size:364.8,k9:41},
+ {cd:'00888',nm:'永豐台灣ESG',type:'市值',region:'台灣',px:37.99,chg:2.68,r20:6.56,r60:71.13,r1:161.28,yield:6,size:146,k9:61},
+ {cd:'009816',nm:'凱基台灣TOP50',type:'市值',region:'台灣',px:15.65,chg:3.99,r20:1.62,r60:46.81,r1:null,yield:null,size:1613.1,k9:39},
  {cd:'00646',nm:'元大S&P500',type:'市值',region:'國際',px:74.65,chg:0.61,r20:-0.4,r60:13.54,r1:32.12,yield:null,size:418.2,k9:62},
  {cd:'00662',nm:'富邦NASDAQ',type:'市值',region:'國際',px:122.5,chg:1.74,r20:-0.2,r60:25,r1:44.46,yield:null,size:1031.1,k9:57},
- {cd:'0056',nm:'元大高股息',type:'高息',region:'台灣',px:53.25,chg:2.8,r20:2.6,r60:43.07,r1:69.05,yield:6.76,size:7043.2,k9:49},
- {cd:'00878',nm:'國泰永續高股息',type:'高息',region:'台灣',px:33.5,chg:1.82,r20:4.72,r60:53.88,r1:73.58,yield:5.61,size:6048.4,k9:41},
- {cd:'00919',nm:'群益台灣精選高息',type:'高息',region:'台灣',px:29.5,chg:0.14,r20:1.65,r60:35.51,r1:54.37,yield:9.69,size:5308.8,k9:27},
- {cd:'00929',nm:'復華台灣科技優息',type:'高息',region:'台灣',px:30.78,chg:2.63,r20:0.79,r60:65.22,r1:88.6,yield:3.48,size:1364.6,k9:38},
+ {cd:'0056',nm:'元大高股息',type:'高息',region:'台灣',px:53.25,chg:2.8,r20:2.6,r60:43.07,r1:69.05,yield:6.76,size:7183.8,k9:49},
+ {cd:'00878',nm:'國泰永續高股息',type:'高息',region:'台灣',px:33.5,chg:1.82,r20:4.72,r60:53.88,r1:73.58,yield:5.61,size:6147.2,k9:41},
+ {cd:'00919',nm:'群益台灣精選高息',type:'高息',region:'台灣',px:29.5,chg:0.14,r20:1.65,r60:35.51,r1:54.37,yield:9.69,size:5357.3,k9:27},
+ {cd:'00929',nm:'復華台灣科技優息',type:'高息',region:'台灣',px:30.78,chg:2.63,r20:0.79,r60:65.22,r1:88.6,yield:3.48,size:1396.6,k9:38},
  {cd:'00713',nm:'元大台灣高息低波',type:'高息',region:'台灣',px:60.2,chg:0.33,r20:5.6,r60:18.81,r1:27.43,yield:5.55,size:1050,k9:51},
- {cd:'00940',nm:'元大台灣價值高息',type:'高息',region:'台灣',px:12.65,chg:1.36,r20:3.52,r60:33.72,r1:48.65,yield:3.83,size:null,k9:48},
- {cd:'00900',nm:'富邦特選高股息30',type:'高息',region:'台灣',px:19.21,chg:1.21,r20:-1.49,r60:40.01,r1:60.89,yield:5.6,size:316.5,k9:32},
- {cd:'00939',nm:'統一台灣高息動能',type:'高息',region:'台灣',px:21.46,chg:0.94,r20:5.04,r60:40.08,r1:65.33,yield:3.72,size:258.8,k9:36},
- {cd:'00915',nm:'凱基優選高股息30',type:'高息',region:'台灣',px:32.48,chg:1.18,r20:10.89,r60:41.59,r1:54.3,yield:4.53,size:null,k9:58},
+ {cd:'00940',nm:'元大台灣價值高息',type:'高息',region:'台灣',px:12.65,chg:1.36,r20:3.52,r60:33.72,r1:48.65,yield:3.83,size:702.7,k9:48},
+ {cd:'00900',nm:'富邦特選高股息30',type:'高息',region:'台灣',px:19.21,chg:1.21,r20:-1.49,r60:40.01,r1:60.89,yield:5.6,size:320.2,k9:32},
+ {cd:'00939',nm:'統一台灣高息動能',type:'高息',region:'台灣',px:21.46,chg:0.94,r20:5.04,r60:40.08,r1:65.33,yield:3.72,size:257.9,k9:36},
+ {cd:'00915',nm:'凱基優選高股息30',type:'高息',region:'台灣',px:32.48,chg:1.18,r20:10.89,r60:41.59,r1:54.3,yield:4.53,size:172.9,k9:58},
  {cd:'00679B',nm:'元大美債20年',type:'債券',region:'國際',px:27.44,chg:-0.04,r20:4.22,r60:1.29,r1:14.24,yield:4.08,size:1833.8,k9:94},
  {cd:'00687B',nm:'國泰20年美債',type:'債券',region:'國際',px:28.55,chg:0,r20:4.16,r60:1.21,r1:14.2,yield:3.93,size:1423.5,k9:93},
  {cd:'00757',nm:'統一FANG+',type:'科技',region:'國際',px:127,chg:1.36,r20:-7.9,r60:20.84,r1:22.35,yield:null,size:362.4,k9:42},
- {cd:'0052',nm:'富邦科技',type:'科技',region:'台灣',px:63.35,chg:3.26,r20:2.1,r60:45.1,r1:141.52,yield:1.89,size:1567.1,k9:42},
- {cd:'00891',nm:'中信關鍵半導體',type:'科技',region:'台灣',px:37.36,chg:3.66,r20:2.58,r60:61.38,r1:151.24,yield:8.06,size:592.6,k9:38},
- {cd:'00935',nm:'野村臺灣新科技50',type:'科技',region:'台灣',px:62.45,chg:5.94,r20:0.08,r60:66.71,r1:207.94,yield:3.12,size:null,k9:44},
- {cd:'00927',nm:'群益半導體收益',type:'科技',region:'台灣',px:41.75,chg:3.99,r20:1.19,r60:78.5,r1:167.97,yield:5.49,size:339.4,k9:42},
- {cd:'00892',nm:'富邦台灣半導體',type:'科技',region:'台灣',px:44.8,chg:3.39,r20:0.63,r60:53.32,r1:165.88,yield:1.04,size:117.5,k9:34},
- {cd:'00735',nm:'國泰臺韓科技',type:'科技',region:'國際',px:116.85,chg:4.33,r20:0.43,r60:75.71,r1:251.22,yield:1.07,size:120,k9:40},
+ {cd:'0052',nm:'富邦科技',type:'科技',region:'台灣',px:63.35,chg:3.26,r20:2.1,r60:45.1,r1:141.52,yield:1.89,size:1610.6,k9:42},
+ {cd:'00891',nm:'中信關鍵半導體',type:'科技',region:'台灣',px:37.36,chg:3.66,r20:2.58,r60:61.38,r1:151.24,yield:8.06,size:614.1,k9:38},
+ {cd:'00935',nm:'野村臺灣新科技50',type:'科技',region:'台灣',px:62.45,chg:5.94,r20:0.08,r60:66.71,r1:207.94,yield:3.12,size:460.6,k9:44},
+ {cd:'00927',nm:'群益半導體收益',type:'科技',region:'台灣',px:41.75,chg:3.99,r20:1.19,r60:78.5,r1:167.97,yield:5.49,size:352,k9:42},
+ {cd:'00892',nm:'富邦台灣半導體',type:'科技',region:'台灣',px:44.8,chg:3.39,r20:0.63,r60:53.32,r1:165.88,yield:1.04,size:122,k9:34},
+ {cd:'00735',nm:'國泰臺韓科技',type:'科技',region:'國際',px:116.85,chg:4.33,r20:0.43,r60:75.71,r1:251.22,yield:1.07,size:123.3,k9:40},
 ];
 let holds={'0050':10,'0056':30,'00878':50,'2881':20,'2882':10};
 // 加權指數 MACD 市場時鐘（資料庫真實快照 2026/06/30；日柱=DIF-MACD、週柱=週DIF-週MACD，取 TWA00 加權指數）
@@ -348,13 +348,13 @@ function closeHelp(){document.getElementById('hmodal').classList.remove('open');
 // 穩定金融股池（近12月實際配息／2026/06/30 現價；殖利率=近一年現金股利/現價，連配年數沿用）
 const FIN=[
  {cd:'2892',nm:'第一金',px:32.75,yield:2.9,yrs:22},
- {cd:'2884',nm:'玉山金',px:34.45,yield:3.48,yrs:17},
+ {cd:'2884',nm:'玉山金',px:33.05,yield:3.63,yrs:17},
  {cd:'2886',nm:'兆豐金',px:46.1,yield:3.47,yrs:24},
  {cd:'2880',nm:'華南金',px:38,yield:3.29,yrs:23},
  {cd:'2801',nm:'彰銀',px:24,yield:2.08,yrs:20},
  {cd:'2891',nm:'中信金',px:71,yield:3.24,yrs:19},
  {cd:'5880',nm:'合庫金',px:24.85,yield:2.82,yrs:23},
- {cd:'2881',nm:'富邦金',px:129.5,yield:3.28,yrs:17},
+ {cd:'2881',nm:'富邦金',px:125.25,yield:3.39,yrs:17},
  {cd:'2887',nm:'台新金',px:33.25,yield:2.71,yrs:16},
  {cd:'2882',nm:'國泰金',px:98.3,yield:3.56,yrs:17},
  {cd:'2890',nm:'永豐金',px:39.9,yield:2.28,yrs:17},
@@ -406,7 +406,7 @@ function dreamStep(){ if(dreamFilled<dreamMonths){dreamFilled++;renderProgress()
 const CHEAP=[
  {cd:'6739',nm:'竹陞科技',px:1040,chg:4.42,k9:15,bias:-20.8,pe:34.6,cash:13,maxY:2.28},
  {cd:'3706',nm:'神達',px:87.3,chg:1.04,k9:42,bias:2.8,pe:14.8,cash:1,maxY:6.3},
- {cd:'6285',nm:'啟碁',px:259.5,chg:9.96,k9:25,bias:0.1,pe:23.2,cash:4.801,maxY:4.03},
+ {cd:'6285',nm:'啟碁',px:255.2,chg:9.96,k9:25,bias:0.1,pe:23.2,cash:4.801,maxY:4.03},
  {cd:'6907',nm:'雅特力-KY',px:146.5,chg:4.27,k9:36,bias:13.1,pe:29.5,cash:0.994,maxY:0.68},
  {cd:'3167',nm:'大量',px:842,chg:8.79,k9:40,bias:10.9,pe:35.9,cash:0.999,maxY:7.07},
 ];
@@ -456,7 +456,7 @@ function openCheap(cd){
 
 // 功能4：持股股利行事曆
 const TODAY='20260630';
-const DIVDATES={'00939':['20260702','20260724'],'00940':['20260709','20260803'],'2884':['20260701','20260727'],'2891':['20260710','20260807'],'2881':['20260701','20260731'],'2882':['20260630','20260728'],'2890':['20260723','20260824']};
+const DIVDATES={'006208':['20260716','20260810'],'00692':['20260716','20260810'],'00892':['20260716','20260810'],'00900':['20260716','20260810'],'00927':['20260716','20260811'],'00939':['20260702','20260724'],'00940':['20260709','20260803'],'2884':['20260701','20260727'],'2891':['20260710','20260807'],'2881':['20260701','20260731'],'2882':['20260630','20260728'],'2890':['20260723','20260824']};
 const ETF_MONTH=['00878','00919','00929','00940','00939'], ETF_HALF=['0050','006208','00646','00662'];
 function freqOf(cd,kind){ if(kind!=='ETF')return '年配'; if(ETF_MONTH.includes(cd))return '月配'; if(ETF_HALF.includes(cd))return '半年配'; return '季配'; }
 function instr(cd){
@@ -492,6 +492,7 @@ const US_LATEST='20260629';
 const USETF=[
  {cd:'VOO',nm:'Vanguard S&P 500 ETF',nav:681.24,chg:7.91,chgpct:1.17},
  {cd:'IVV',nm:'iShares Core S&P 500 ETF',nav:744.65,chg:8.65,chgpct:1.18},
+ {cd:'SPY',nm:'State Street SPDR S&P 500 ETF',nav:741.19,chg:8.61,chgpct:1.18},
  {cd:'VTI',nm:'Vanguard Total Stock Market ETF',nav:367.23,chg:4.21,chgpct:1.16},
  {cd:'QQQ',nm:'Invesco QQQ Trust Series I',nav:724.22,chg:15.96,chgpct:2.25},
  {cd:'VEA',nm:'Vanguard FTSE Developed Markets ETF',nav:71,chg:0.53,chgpct:0.75},
@@ -501,15 +502,14 @@ const USETF=[
  {cd:'BND',nm:'Vanguard Total Bond Market ETF',nav:73.68,chg:0.03,chgpct:0.04},
  {cd:'IEMG',nm:'iShares Core MSCI Emerging Markets ETF',nav:81.94,chg:0.81,chgpct:1},
  {cd:'VXUS',nm:'Vanguard Total International Stock ETF',nav:84.96,chg:0.75,chgpct:0.89},
+ {cd:'SPYM',nm:'State Street SPDR Portfolio S&P 500 ETF',nav:87.23,chg:1.01,chgpct:1.18},
  {cd:'VGT',nm:'Vanguard Information Technology ETF',nav:116.51,chg:2.28,chgpct:2},
+ {cd:'AGG',nm:'iShares Core U.S. Aggregate Bond ETF',nav:99.37,chg:0.05,chgpct:0.05},
  {cd:'GLD',nm:'SPDR Gold Shares',nav:369.51,chg:-4.2,chgpct:-1.12},
  {cd:'IWF',nm:'iShares Russell 1000 Growth ETF',nav:122.02,chg:2.91,chgpct:2.44},
  {cd:'IJH',nm:'iShares Core S&P Mid-Cap ETF',nav:76.53,chg:0.24,chgpct:0.31},
  {cd:'VWO',nm:'Vanguard FTSE Emerging Markets ETF',nav:58.96,chg:0.72,chgpct:1.24},
- {cd:'IJR',nm:'iShares Core S&P Small Cap ETF',nav:147.3,chg:-0.31,chgpct:-0.21},
- {cd:'VIG',nm:'Vanguard Dividend Appreciation ETF',nav:235.94,chg:1.16,chgpct:0.49},
- {cd:'VO',nm:'Vanguard Mid-Cap ETF',nav:80.49,chg:0.47,chgpct:0.59},
- {cd:'QQQM',nm:'Invesco NASDAQ 100 ETF',nav:298.18,chg:6.57,chgpct:2.25},
+ {cd:'XLK',nm:'State Street Technology Select Sector SPDR ETF',nav:185.5,chg:4.02,chgpct:2.21},
 ];
 function renderWorld(){
   document.getElementById('worldList').innerHTML=USETF.map((d,i)=>{
