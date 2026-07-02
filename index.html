@@ -247,23 +247,30 @@ const MODEDEF={
  long:{name:'長週期',icon:'🐢',cond:'週MACD 剛翻綠（第一根綠柱）',say:'長線開始往下走，適合存好幾年的人分批撿便宜。',sort:'size'},
 };
 // 雷達狀態（週/月/年 三週期計分；保護機制由前端套用）
-const RADAR={"0050":{"w":{"st":"NORMAL","r10":2.6,"b20":3.1,"rsi":59.7},"m":{"st":"HOT","dd60":-2.1,"b60":12.0},"y":{"st":"HOT","dd52":-2.1,"b240":53.0}},"006208":{"w":{"st":"NORMAL","r10":2.4,"b20":3.2,"rsi":59.9},"m":{"st":"HOT","dd60":-2.0,"b60":12.1},"y":{"st":"HOT","dd52":-2.0,"b240":53.2}},"00692":{"w":{"st":"NORMAL","r10":2.1,"b20":2.4,"rsi":58.5},"m":{"st":"HOT","dd60":-2.4,"b60":10.7},"y":{"st":"HOT","dd52":-2.4,"b240":48.9}},"00922":{"w":{"st":"NORMAL","r10":3.1,"b20":3.6,"rsi":61.2},"m":{"st":"NORMAL","dd60":-1.8,"b60":13.9},"y":{"st":"HOT","dd52":-1.8,"b240":56.1}},"00850":{"w":{"st":"NORMAL","r10":1.6,"b20":2.6,"rsi":59.3},"m":{"st":"HOT","dd60":-2.3,"b60":13.0},"y":{"st":"HOT","dd52":-2.3,"b240":54.8}},"00923":{"w":{"st":"NORMAL","r10":2.0,"b20":2.6,"rsi":58.7},"m":{"st":"HOT","dd60":-2.5,"b60":12.8},"y":{"st":"HOT","dd52":-2.5,"b240":57.5}},"00888":{"w":{"st":"NORMAL","r10":5.9,"b20":4.9,"rsi":62.8},"m":{"st":"NORMAL","dd60":-2.5,"b60":20.7},"y":{"st":"HOT","dd52":-2.5,"b240":73.7}},"009816":{"w":{"st":"NORMAL","r10":1.5,"b20":2.7,"rsi":59.1},"m":{"st":"NORMAL","dd60":-2.4,"b60":12.3},"y":{"st":"NORMAL","dd52":null,"b240":null}},"00646":{"w":{"st":"NORMAL","r10":0.5,"b20":1.2,"rsi":59.3},"m":{"st":"NORMAL","dd60":-0.3,"b60":3.2},"y":{"st":"NORMAL","dd52":-0.3,"b240":12.5}},"00662":{"w":{"st":"NORMAL","r10":-0.2,"b20":0.9,"rsi":54.5},"m":{"st":"NORMAL","dd60":-1.4,"b60":5.3},"y":{"st":"NORMAL","dd52":-1.4,"b240":19.5}},"00757":{"w":{"st":"NORMAL","r10":-0.8,"b20":0.4,"rsi":51.7},"m":{"st":"NORMAL","dd60":-7.1,"b60":2.5},"y":{"st":"NORMAL","dd52":-7.1,"b240":9.8}},"0052":{"w":{"st":"NORMAL","r10":3.1,"b20":3.7,"rsi":60.3},"m":{"st":"HOT","dd60":-1.8,"b60":12.6},"y":{"st":"HOT","dd52":-1.8,"b240":57.5}},"00891":{"w":{"st":"NORMAL","r10":3.6,"b20":4.4,"rsi":60.5},"m":{"st":"NORMAL","dd60":-2.9,"b60":15.5},"y":{"st":"HOT","dd52":-2.9,"b240":71.8}},"00935":{"w":{"st":"NORMAL","r10":2.3,"b20":3.3,"rsi":58.6},"m":{"st":"HOT","dd60":-2.3,"b60":14.6},"y":{"st":"HOT","dd52":-2.3,"b240":78.9}},"00927":{"w":{"st":"NORMAL","r10":6.8,"b20":6.3,"rsi":62.6},"m":{"st":"NORMAL","dd60":-1.6,"b60":21.5},"y":{"st":"HOT","dd52":-1.6,"b240":81.4}},"00892":{"w":{"st":"NORMAL","r10":4.0,"b20":5.1,"rsi":61.1},"m":{"st":"HOT","dd60":-1.4,"b60":13.3},"y":{"st":"HOT","dd52":-1.4,"b240":76.8}},"00735":{"w":{"st":"ALERT","r10":-2.6,"b20":-1.0,"rsi":51.3},"m":{"st":"NORMAL","dd60":-8.6,"b60":13.0},"y":{"st":"HOT","dd52":-8.6,"b240":81.4}}};
-const RSTATUS={CHEAP:['便宜','var(--g0)','#fff'],NORMAL:['普通','#eef4f9','var(--sub)'],HOT:['過熱','var(--r2c)','#fff'],ALERT:['修正警戒','var(--sun)','#5a4500'],MAJOR:['大修正中','var(--brandD)','#fff'],PROT:['保護中','var(--sky1)','#fff']};
+const RADAR={"0050":{"w":{"st":"NORMAL","wp":0,"r10":2.6,"b20":3.1,"rsi":59.7},"m":{"st":"HOT","mp":0,"dd60":-2.1,"b60":12.0},"y":{"st":"HOT","dd52":-2.1,"b240":53.0}},"006208":{"w":{"st":"NORMAL","wp":0,"r10":2.4,"b20":3.2,"rsi":59.9},"m":{"st":"HOT","mp":0,"dd60":-2.0,"b60":12.1},"y":{"st":"HOT","dd52":-2.0,"b240":53.2}},"00692":{"w":{"st":"NORMAL","wp":0,"r10":2.1,"b20":2.4,"rsi":58.5},"m":{"st":"HOT","mp":0,"dd60":-2.4,"b60":10.7},"y":{"st":"HOT","dd52":-2.4,"b240":48.9}},"00922":{"w":{"st":"NORMAL","wp":0,"r10":3.1,"b20":3.6,"rsi":61.2},"m":{"st":"NORMAL","mp":0,"dd60":-1.8,"b60":13.9},"y":{"st":"HOT","dd52":-1.8,"b240":56.1}},"00850":{"w":{"st":"NORMAL","wp":0,"r10":1.6,"b20":2.6,"rsi":59.3},"m":{"st":"HOT","mp":0,"dd60":-2.3,"b60":13.0},"y":{"st":"HOT","dd52":-2.3,"b240":54.8}},"00923":{"w":{"st":"NORMAL","wp":0,"r10":2.0,"b20":2.6,"rsi":58.7},"m":{"st":"HOT","mp":0,"dd60":-2.5,"b60":12.8},"y":{"st":"HOT","dd52":-2.5,"b240":57.5}},"00888":{"w":{"st":"NORMAL","wp":0,"r10":5.9,"b20":4.9,"rsi":62.8},"m":{"st":"NORMAL","mp":0,"dd60":-2.5,"b60":20.7},"y":{"st":"HOT","dd52":-2.5,"b240":73.7}},"009816":{"w":{"st":"NORMAL","wp":0,"r10":1.5,"b20":2.7,"rsi":59.1},"m":{"st":"HOT","mp":0,"dd60":-2.4,"b60":12.3},"y":{"st":"NORMAL","dd52":null,"b240":null}},"00646":{"w":{"st":"NORMAL","wp":0,"r10":0.5,"b20":1.2,"rsi":59.3},"m":{"st":"NORMAL","mp":0,"dd60":-0.3,"b60":3.2},"y":{"st":"NORMAL","dd52":-0.3,"b240":12.5}},"00662":{"w":{"st":"NORMAL","wp":0,"r10":-0.2,"b20":0.9,"rsi":54.5},"m":{"st":"NORMAL","mp":0,"dd60":-1.4,"b60":5.3},"y":{"st":"NORMAL","dd52":-1.4,"b240":19.5}},"00757":{"w":{"st":"NORMAL","wp":0,"r10":-0.8,"b20":0.4,"rsi":51.7},"m":{"st":"NORMAL","mp":0,"dd60":-7.1,"b60":2.5},"y":{"st":"NORMAL","dd52":-7.1,"b240":9.8}},"0052":{"w":{"st":"NORMAL","wp":0,"r10":3.1,"b20":3.7,"rsi":60.3},"m":{"st":"HOT","mp":0,"dd60":-1.8,"b60":12.6},"y":{"st":"HOT","dd52":-1.8,"b240":57.5}},"00891":{"w":{"st":"NORMAL","wp":0,"r10":3.6,"b20":4.4,"rsi":60.5},"m":{"st":"NORMAL","mp":0,"dd60":-2.9,"b60":15.5},"y":{"st":"HOT","dd52":-2.9,"b240":71.8}},"00935":{"w":{"st":"NORMAL","wp":0,"r10":2.3,"b20":3.3,"rsi":58.6},"m":{"st":"HOT","mp":0,"dd60":-2.3,"b60":14.6},"y":{"st":"HOT","dd52":-2.3,"b240":78.9}},"00927":{"w":{"st":"NORMAL","wp":0,"r10":6.8,"b20":6.3,"rsi":62.6},"m":{"st":"NORMAL","mp":0,"dd60":-1.6,"b60":21.5},"y":{"st":"HOT","dd52":-1.6,"b240":81.4}},"00892":{"w":{"st":"NORMAL","wp":0,"r10":4.0,"b20":5.1,"rsi":61.1},"m":{"st":"HOT","mp":0,"dd60":-1.4,"b60":13.3},"y":{"st":"HOT","dd52":-1.4,"b240":76.8}},"00735":{"w":{"st":"NORMAL","wp":0,"r10":-2.6,"b20":-1.0,"rsi":51.3},"m":{"st":"NORMAL","mp":0,"dd60":-8.6,"b60":13.0},"y":{"st":"HOT","dd52":-8.6,"b240":81.4}}};
+const RSTATUS={CHEAP:['便宜','var(--g0)','#fff'],NORMAL:['普通','#eef4f9','var(--sub)'],HOT:['過熱','var(--r2c)','#fff'],ALERT:['修正警戒','var(--sun)','#5a4500'],MAJOR:['大修正中','var(--brandD)','#fff'],PROT:['🛡 保護中','var(--sky1)','#fff'],COOL:['❄ 冷卻中','#dceaf4','#3d5366']};
 const RDESC={
- w:{CHEAP:'短線跌深，且下跌力道開始放緩。',NORMAL:'短線沒有明顯便宜，也沒有明顯過熱。',HOT:'短線漲幅偏高，追價風險上升。',ALERT:'價格雖然跌深，但下跌力道仍在擴大。',PROT:'月／年級別修正中，暫不視為便宜。'},
- m:{CHEAP:'已出現一波修正，且波段下跌力道開始收斂。',NORMAL:'波段沒有明顯折價，也沒有明顯過熱。',HOT:'波段漲幅偏高，追價風險上升。',ALERT:'價格進入波段低位，但跌勢還沒收斂。',PROT:'年級別大修正中，暫不視為便宜。'},
- y:{CHEAP:'進入年度級相對低位，大週期跌勢有收斂跡象。',NORMAL:'目前處在年度正常區間。',HOT:'年度漲幅偏高，大週期過熱。',ALERT:'年度跌深但跌勢尚未收斂。',MAJOR:'年級別大週期仍在轉弱。'}
+ w:{CHEAP:'短線跌深，且下跌力道開始放緩。',NORMAL:'短線沒有明顯便宜，也沒有明顯過熱。',HOT:'短線漲幅偏高，追價風險上升。',ALERT:'價格雖然跌深，但下跌力道仍在擴大。',PROT:'短線雖跌深，但上層週期風險升高，已暫停週級別便宜訊號。',COOL:'已完成參與標記，暫停連續提示，避免短時間反覆追同一訊號。'},
+ m:{CHEAP:'已出現一波修正，且波段下跌力道開始收斂。',NORMAL:'波段沒有明顯折價，也沒有明顯過熱。',HOT:'波段漲幅偏高，追價風險上升。',ALERT:'價格進入波段低位，但跌勢還沒收斂。',PROT:'價格雖進入波段低位，但年級別風險尚未穩定，已暫停月級別便宜訊號。'},
+ y:{CHEAP:'進入年度級相對低位，大週期跌勢有收斂跡象。',NORMAL:'目前處在年度正常區間。',HOT:'年度級漲幅偏高，大額追價風險上升。',ALERT:'年度跌深但跌勢尚未收斂。',MAJOR:'價格已經下跌，但大週期跌勢尚未穩定。'}
 };
-const RPRIO={CHEAP:0,PROT:1,NORMAL:2,HOT:3,ALERT:4,MAJOR:5};
+const RPRIO={CHEAP:0,PROT:1,COOL:2,NORMAL:3,HOT:4,ALERT:5,MAJOR:6};
 const PERNAME={w:'週（1~2 週）',m:'月（1~3 個月）',y:'年（6~12 個月）'};
 let RMODE='w', PROTECT=true;
+// 冷卻中(規格§13 簡化版)：本機儲存「已參與」標記，5個交易日(以7曆日近似)後自動解除
+function coolMap(){try{return JSON.parse(localStorage.getItem('radarCool')||'{}')}catch(e){return{}}}
+function coolActive(cd){const t=coolMap()[cd];return !!t&&(Date.now()-t)<7*86400000;}
+function coolUntil(cd){const t=coolMap()[cd];if(!coolActive(cd))return null;const d=new Date(t+7*86400000);return (d.getMonth()+1)+'/'+d.getDate();}
+function markCool(cd){const m=coolMap();m[cd]=Date.now();localStorage.setItem('radarCool',JSON.stringify(m));closeSheet();renderRadar();}
+function clearCool(cd){const m=coolMap();delete m[cd];localStorage.setItem('radarCool',JSON.stringify(m));closeSheet();renderRadar();}
 function radarStat(cd,per){
   const r=RADAR[cd]; if(!r)return null; let st=r[per].st;
-  if(PROTECT&&st==='CHEAP'){
-    if(per==='w'&&(r.m.st==='ALERT'||r.y.st==='MAJOR'))st='PROT';
-    if(per==='m'&&r.y.st==='MAJOR')st='PROT';
+  if(PROTECT){
+    if(per==='w'&&coolActive(cd))return 'COOL';               // §15.2 冷卻最優先
+    if(per==='w'&&st==='CHEAP'&&(r.w.wp||0)>=2)st='PROT';     // §12 週保護:6條件≥2
+    if(per==='m'&&st==='CHEAP'&&(r.m.mp||0)>=2)st='PROT';     // §12 月保護:6條件≥2
   }
-  return st;
+  return st;                                                   // §15.4 年級別永遠原始訊號
 }
 function toggleProtect(){
   PROTECT=!PROTECT;
@@ -326,7 +333,7 @@ function renderRadar(){
   let list=DATA.filter(d=>MOMO_TYPES.includes(d.type)&&RADAR[d.cd]).map(d=>({d,st:radarStat(d.cd,RMODE),ytd:YTD[d.cd]}));
   list.sort((a,b)=>(RPRIO[a.st]-RPRIO[b.st])||((b.ytd==null?-999:b.ytd)-(a.ytd==null?-999:a.ytd)));
   const cnt={};list.forEach(x=>cnt[x.st]=(cnt[x.st]||0)+1);
-  const sum=['CHEAP','HOT','ALERT','MAJOR','PROT'].filter(k=>cnt[k]).map(k=>`${RSTATUS[k][0]} ${cnt[k]} 檔`).join('、')||'全部普通';
+  const sum=['CHEAP','HOT','ALERT','MAJOR','PROT','COOL'].filter(k=>cnt[k]).map(k=>`${RSTATUS[k][0]} ${cnt[k]} 檔`).join('、')||'全部普通';
   document.getElementById('momoHint').innerHTML=`<b>${PERNAME[RMODE]}</b>雷達：${sum}。<br>${PROTECT?'🛡 保護開啟：上層週期修正時，「便宜」會改標「保護中」。':'🛡 保護關閉：顯示各週期原始訊號。'}`;
   document.getElementById('momoList').innerHTML=list.map(({d,st,ytd})=>{
     const S=RSTATUS[st];
@@ -355,6 +362,7 @@ function openSheet(cd){
       <div><div class="k">基金規模</div><div class="v">${d.size==null?'—':fmt(d.size)+' 億'}</div></div>
       <div><div class="k">日K(9)</div><div class="v">${d.k9}</div></div>
     </div>
+    ${RADAR[cd]&&coolActive(cd)?`<button class="btn ghost" onclick="clearCool('${cd}')">❄ 冷卻中（約至 ${coolUntil(cd)}）— 點擊手動解除</button>`:(RADAR[cd]&&RADAR[cd].w.st==='CHEAP'?`<button class="btn ghost" onclick="markCool('${cd}')">✅ 我已參與這波（啟動 5 個交易日冷卻）</button>`:'')}
     <button class="btn ${inW?'ghost':''}" onclick="toggleHold('${cd}')">${inW?'★ 已加入自選（點擊移除）':'☆ 加入自選'}</button>`;
   document.getElementById('modal').classList.add('open');
 }
