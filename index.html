@@ -129,12 +129,15 @@
   <!-- 1. 動能ETF -->
   <section class="view active" id="v-momo">
     <div class="vtitle">🪁 風度圖</div>
-    <div class="vsub">用「加權指數 MACD」判斷大盤節奏，挑對應 ETF（已排除高股息／債券，只留市值＋科技）。</div>
+    <div class="vsub">每檔 ETF 依「週／月／年」自動判斷：便宜、普通、過熱、修正警戒（只收市值＋科技型，已排除高股息／債券）。</div>
     <div id="marketClock"></div>
-    <div class="seg" id="momoSeg" style="margin-top:12px">
-      <button data-m="short" onclick="setMode(this,'short')">🔥 短<small>週MACD翻紅</small></button>
-      <button data-m="mid" onclick="setMode(this,'mid')">📈 中<small>日MACD翻綠</small></button>
-      <button data-m="long" onclick="setMode(this,'long')">🐢 長<small>週MACD翻綠</small></button>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:12px">
+      <div class="seg" id="momoSeg" style="flex:1;margin-bottom:0">
+        <button data-m="w" class="on" onclick="setMode(this,'w')">週<small>1~2週</small></button>
+        <button data-m="m" onclick="setMode(this,'m')">月<small>1~3個月</small></button>
+        <button data-m="y" onclick="setMode(this,'y')">年<small>6~12個月</small></button>
+      </div>
+      <button id="protBtn" onclick="toggleProtect()" style="flex-shrink:0;border:1px solid var(--sky1);background:var(--sky1);color:#fff;font-size:11px;font-weight:800;padding:8px 10px;border-radius:12px">🛡 保護：開</button>
     </div>
     <div id="momoHint" class="vsub" style="margin-top:8px"></div>
     <div id="momoList"></div>
@@ -209,7 +212,7 @@ const DATA=[
  {cd:'00922',nm:'國泰台灣領袖50',type:'市值',region:'台灣',px:41.86,chg:-0.12,r20:2.32,r60:50.36,r1:124.69,yield:7.76,size:872.2,k9:58},
  {cd:'00850',nm:'元大臺灣ESG永續',type:'市值',region:'台灣',px:92.85,chg:-0.16,r20:0.27,r60:50,r1:121.6,yield:3.18,size:388.6,k9:55},
  {cd:'00923',nm:'群益台ESG低碳50',type:'市值',region:'台灣',px:43.51,chg:-0.41,r20:0.07,r60:51.92,r1:125.44,yield:6.05,size:373.2,k9:53},
- {cd:'00888',nm:'永豐台灣ESG',type:'市值',region:'台灣',px:37.76,chg:-0.71,r20:6.04,r60:70.09,r1:158.98,yield:6.04,size:147.3,k9:53},
+ {cd:'00888',nm:'永豐台灣ESG',type:'市值',region:'台灣',px:37.76,chg:-0.71,r20:6.04,r60:70.09,r1:158.98,yield:6.04,size:null,k9:53},
  {cd:'009816',nm:'凱基台灣TOP50',type:'市值',region:'台灣',px:15.78,chg:-0.32,r20:0.25,r60:47.75,r1:null,yield:null,size:null,k9:51},
  {cd:'00646',nm:'元大S&P500',type:'市值',region:'國際',px:75,chg:0.07,r20:-0.27,r60:13.21,r1:32.63,yield:null,size:421.8,k9:81},
  {cd:'00662',nm:'富邦NASDAQ',type:'市值',region:'國際',px:122.2,chg:-1.17,r20:-1.41,r60:23.62,r1:45.22,yield:null,size:null,k9:70},
@@ -243,7 +246,34 @@ const MODEDEF={
  mid:{name:'中週期',icon:'📈',cond:'日MACD 剛翻綠（第一根綠柱）',say:'大方向沒變，但這幾天剛好在回檔打折。',sort:'ytd'},
  long:{name:'長週期',icon:'🐢',cond:'週MACD 剛翻綠（第一根綠柱）',say:'長線開始往下走，適合存好幾年的人分批撿便宜。',sort:'size'},
 };
-let MODE='mid';
+// 雷達狀態（週/月/年 三週期計分；保護機制由前端套用）
+const RADAR={"0050":{"w":{"st":"NORMAL","r10":2.6,"b20":3.1,"rsi":59.7},"m":{"st":"HOT","dd60":-2.1,"b60":12.0},"y":{"st":"HOT","dd52":-2.1,"b240":53.0}},"006208":{"w":{"st":"NORMAL","r10":2.4,"b20":3.2,"rsi":59.9},"m":{"st":"HOT","dd60":-2.0,"b60":12.1},"y":{"st":"HOT","dd52":-2.0,"b240":53.2}},"00692":{"w":{"st":"NORMAL","r10":2.1,"b20":2.4,"rsi":58.5},"m":{"st":"HOT","dd60":-2.4,"b60":10.7},"y":{"st":"HOT","dd52":-2.4,"b240":48.9}},"00922":{"w":{"st":"NORMAL","r10":3.1,"b20":3.6,"rsi":61.2},"m":{"st":"NORMAL","dd60":-1.8,"b60":13.9},"y":{"st":"HOT","dd52":-1.8,"b240":56.1}},"00850":{"w":{"st":"NORMAL","r10":1.6,"b20":2.6,"rsi":59.3},"m":{"st":"HOT","dd60":-2.3,"b60":13.0},"y":{"st":"HOT","dd52":-2.3,"b240":54.8}},"00923":{"w":{"st":"NORMAL","r10":2.0,"b20":2.6,"rsi":58.7},"m":{"st":"HOT","dd60":-2.5,"b60":12.8},"y":{"st":"HOT","dd52":-2.5,"b240":57.5}},"00888":{"w":{"st":"NORMAL","r10":5.9,"b20":4.9,"rsi":62.8},"m":{"st":"NORMAL","dd60":-2.5,"b60":20.7},"y":{"st":"HOT","dd52":-2.5,"b240":73.7}},"009816":{"w":{"st":"NORMAL","r10":1.5,"b20":2.7,"rsi":59.1},"m":{"st":"NORMAL","dd60":-2.4,"b60":12.3},"y":{"st":"NORMAL","dd52":null,"b240":null}},"00646":{"w":{"st":"NORMAL","r10":0.5,"b20":1.2,"rsi":59.3},"m":{"st":"NORMAL","dd60":-0.3,"b60":3.2},"y":{"st":"NORMAL","dd52":-0.3,"b240":12.5}},"00662":{"w":{"st":"NORMAL","r10":-0.2,"b20":0.9,"rsi":54.5},"m":{"st":"NORMAL","dd60":-1.4,"b60":5.3},"y":{"st":"NORMAL","dd52":-1.4,"b240":19.5}},"00757":{"w":{"st":"NORMAL","r10":-0.8,"b20":0.4,"rsi":51.7},"m":{"st":"NORMAL","dd60":-7.1,"b60":2.5},"y":{"st":"NORMAL","dd52":-7.1,"b240":9.8}},"0052":{"w":{"st":"NORMAL","r10":3.1,"b20":3.7,"rsi":60.3},"m":{"st":"HOT","dd60":-1.8,"b60":12.6},"y":{"st":"HOT","dd52":-1.8,"b240":57.5}},"00891":{"w":{"st":"NORMAL","r10":3.6,"b20":4.4,"rsi":60.5},"m":{"st":"NORMAL","dd60":-2.9,"b60":15.5},"y":{"st":"HOT","dd52":-2.9,"b240":71.8}},"00935":{"w":{"st":"NORMAL","r10":2.3,"b20":3.3,"rsi":58.6},"m":{"st":"HOT","dd60":-2.3,"b60":14.6},"y":{"st":"HOT","dd52":-2.3,"b240":78.9}},"00927":{"w":{"st":"NORMAL","r10":6.8,"b20":6.3,"rsi":62.6},"m":{"st":"NORMAL","dd60":-1.6,"b60":21.5},"y":{"st":"HOT","dd52":-1.6,"b240":81.4}},"00892":{"w":{"st":"NORMAL","r10":4.0,"b20":5.1,"rsi":61.1},"m":{"st":"HOT","dd60":-1.4,"b60":13.3},"y":{"st":"HOT","dd52":-1.4,"b240":76.8}},"00735":{"w":{"st":"ALERT","r10":-2.6,"b20":-1.0,"rsi":51.3},"m":{"st":"NORMAL","dd60":-8.6,"b60":13.0},"y":{"st":"HOT","dd52":-8.6,"b240":81.4}}};
+const RSTATUS={CHEAP:['便宜','var(--g0)','#fff'],NORMAL:['普通','#eef4f9','var(--sub)'],HOT:['過熱','var(--r2c)','#fff'],ALERT:['修正警戒','var(--sun)','#5a4500'],MAJOR:['大修正中','var(--brandD)','#fff'],PROT:['保護中','var(--sky1)','#fff']};
+const RDESC={
+ w:{CHEAP:'短線跌深，且下跌力道開始放緩。',NORMAL:'短線沒有明顯便宜，也沒有明顯過熱。',HOT:'短線漲幅偏高，追價風險上升。',ALERT:'價格雖然跌深，但下跌力道仍在擴大。',PROT:'月／年級別修正中，暫不視為便宜。'},
+ m:{CHEAP:'已出現一波修正，且波段下跌力道開始收斂。',NORMAL:'波段沒有明顯折價，也沒有明顯過熱。',HOT:'波段漲幅偏高，追價風險上升。',ALERT:'價格進入波段低位，但跌勢還沒收斂。',PROT:'年級別大修正中，暫不視為便宜。'},
+ y:{CHEAP:'進入年度級相對低位，大週期跌勢有收斂跡象。',NORMAL:'目前處在年度正常區間。',HOT:'年度漲幅偏高，大週期過熱。',ALERT:'年度跌深但跌勢尚未收斂。',MAJOR:'年級別大週期仍在轉弱。'}
+};
+const RPRIO={CHEAP:0,PROT:1,NORMAL:2,HOT:3,ALERT:4,MAJOR:5};
+const PERNAME={w:'週（1~2 週）',m:'月（1~3 個月）',y:'年（6~12 個月）'};
+let RMODE='w', PROTECT=true;
+function radarStat(cd,per){
+  const r=RADAR[cd]; if(!r)return null; let st=r[per].st;
+  if(PROTECT&&st==='CHEAP'){
+    if(per==='w'&&(r.m.st==='ALERT'||r.y.st==='MAJOR'))st='PROT';
+    if(per==='m'&&r.y.st==='MAJOR')st='PROT';
+  }
+  return st;
+}
+function toggleProtect(){
+  PROTECT=!PROTECT;
+  const b=document.getElementById('protBtn');
+  b.style.background=PROTECT?'var(--sky1)':'var(--card)';
+  b.style.color=PROTECT?'#fff':'var(--sub)';
+  b.style.borderColor=PROTECT?'var(--sky1)':'var(--line)';
+  b.textContent=PROTECT?'🛡 保護：開':'🛡 保護：關';
+  renderRadar();
+}
 
 function go(v,el){document.querySelectorAll('.view').forEach(s=>s.classList.remove('active'));document.getElementById('v-'+v).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));el.classList.add('on');window.scrollTo(0,0);}
 
@@ -291,27 +321,22 @@ function renderClock(){
     </div>
     <div style="font-size:11.5px;color:#3d5366;margin-top:6px;line-height:1.5;text-align:center">研判 → <b style="color:var(--brand)">${MODEDEF[am].icon} ${MODEDEF[am].name}</b>：${MODEDEF[am].say}</div></div>`;
 }
-function setMode(el,m){MODE=m;document.querySelectorAll('#momoSeg button').forEach(b=>b.classList.remove('on'));el.classList.add('on');renderMomo();}
-function rankColor(i,n){const f=n>1?i/(n-1):0;return f<=0.2?'var(--g0)':f<=0.4?'var(--g1)':f<=0.6?'var(--g2)':f<=0.8?'var(--r1c)':'var(--r2c)';}
-function renderMomo(){
-  const def=MODEDEF[MODE];
-  document.getElementById('momoHint').innerHTML=`<b>${def.icon} ${def.name}</b>：${def.say}<br>觸發條件：${def.cond}；排序依${def.sort==='ytd'?'今年以來績效':'資金規模'}。`;
-  let list=DATA.filter(d=>MOMO_TYPES.includes(d.type)).map(d=>({d,ytd:YTD[d.cd]}));
-  if(def.sort==='ytd')list=list.filter(x=>x.ytd!=null).sort((a,b)=>b.ytd-a.ytd);
-  else list=list.filter(x=>x.d.size!=null).sort((a,b)=>b.d.size-a.d.size);
-  const n=list.length;
-  document.getElementById('momoList').innerHTML=list.map(({d,ytd},i)=>{
-    const col=def.sort==='ytd'?(ytd>=0?'var(--r2c)':'var(--g0)'):'var(--txt)';
-    const main=def.sort==='ytd'?`${ytd>0?'+':''}${ytd}%`:`${fmt(d.size)}億`;
-    const mlbl=def.sort==='ytd'?'今年以來':'資金規模';
-    const sub=def.sort==='ytd'?`規模 ${d.size==null?'—':fmt(d.size)+'億'}`:`今年以來 ${ytd==null?'—':(ytd>0?'+':'')+ytd+'%'}`;
+function setMode(el,m){RMODE=m;document.querySelectorAll('#momoSeg button').forEach(b=>b.classList.remove('on'));el.classList.add('on');renderRadar();}
+function renderRadar(){
+  let list=DATA.filter(d=>MOMO_TYPES.includes(d.type)&&RADAR[d.cd]).map(d=>({d,st:radarStat(d.cd,RMODE),ytd:YTD[d.cd]}));
+  list.sort((a,b)=>(RPRIO[a.st]-RPRIO[b.st])||((b.ytd==null?-999:b.ytd)-(a.ytd==null?-999:a.ytd)));
+  const cnt={};list.forEach(x=>cnt[x.st]=(cnt[x.st]||0)+1);
+  const sum=['CHEAP','HOT','ALERT','MAJOR','PROT'].filter(k=>cnt[k]).map(k=>`${RSTATUS[k][0]} ${cnt[k]} 檔`).join('、')||'全部普通';
+  document.getElementById('momoHint').innerHTML=`<b>${PERNAME[RMODE]}</b>雷達：${sum}。<br>${PROTECT?'🛡 保護開啟：上層週期修正時，「便宜」會改標「保護中」。':'🛡 保護關閉：顯示各週期原始訊號。'}`;
+  document.getElementById('momoList').innerHTML=list.map(({d,st,ytd})=>{
+    const S=RSTATUS[st];
     return `<div class="etf" onclick="openSheet('${d.cd}')">
-      <div class="rkbadge ${i<3?'top':''}">${i+1}</div>
-      <div class="mid"><div class="nm">${d.nm} <span style="font-size:12px;font-weight:800;color:var(--txt)">$${d.px}</span>${dchg(d.chg)}</div><div class="cd">${d.cd} · ${d.type} · ${d.region}</div>
-        <div style="font-size:10.5px;color:var(--sub);margin-top:3px">${sub}</div></div>
-      <div class="big"><div class="v" style="color:${col}">${main}</div><div class="l">${mlbl}</div></div>
+      <div class="mid"><div class="nm">${d.nm} <span style="font-size:12px;font-weight:800;color:var(--txt)">$${d.px}</span>${dchg(d.chg)}</div>
+        <div class="cd">${d.cd} · ${d.type} · ${d.region} · 今年 ${ytd==null?'—':(ytd>0?'+':'')+ytd+'%'}</div>
+        <div style="font-size:10.5px;color:var(--sub);margin-top:3px">${(RDESC[RMODE]&&RDESC[RMODE][st])||''}</div></div>
+      <div style="flex-shrink:0;background:${S[1]};color:${S[2]};font-size:12.5px;font-weight:900;padding:7px 11px;border-radius:11px">${S[0]}</div>
     </div>`;
-  }).join('')||'<div class="vsub">無符合標的</div>';
+  }).join('')||'<div class="vsub">無資料（待資料更新）</div>';
 }
 
 function openSheet(cd){
@@ -319,6 +344,7 @@ function openSheet(cd){
   document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">✕</button>
     <div style="font-size:18px;font-weight:900">${d.nm}</div>
     <div style="font-size:12px;color:var(--sub)">${d.cd} · ${d.type}型 · ${d.region}</div>
+    ${RADAR[cd]?`<div style="display:flex;gap:6px;margin-top:10px">${['w','m','y'].map(p=>{const st=radarStat(cd,p),S=RSTATUS[st];return `<span style="background:${S[1]};color:${S[2]};font-size:11px;font-weight:800;padding:4px 9px;border-radius:9px">${({w:'週',m:'月',y:'年'})[p]} ${S[0]}</span>`;}).join('')}</div>`:''}
     <div class="kv">
       <div><div class="k">現價</div><div class="v">$${d.px}</div></div>
       <div><div class="k">今日漲跌</div><div class="v" style="color:${d.chg==null?'var(--txt)':(d.chg>=0?'var(--r2c)':'var(--g0)')}">${pct(d.chg)}</div></div>
@@ -531,9 +557,7 @@ function renderWorld(){
   }).join('');
 }
 fillHoldSel();renderWatch();renderWorld();
-MODE=activeMode();renderClock();
-document.querySelectorAll('#momoSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===MODE));
-renderMomo();renderCheap();
+renderClock();renderRadar();renderCheap();
 </script>
 </body>
 </html>
