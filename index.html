@@ -204,42 +204,42 @@ const pct=v=>v==null?'—':(v>0?'+':'')+v+'%';
 // 當日漲跌幅膠囊：漲紅跌綠（台股慣例）
 function dchg(v,sz){ if(v==null)return ''; const up=v>=0; return `<span style="font-size:${sz||11}px;font-weight:800;color:${up?'var(--r2c)':'var(--g0)'};margin-left:5px">${up?'▲+':'▼'}${v}%</span>`; }
 
-// 28 檔 ETF：資料庫真實快照(2026/09/09 收盤)。px=現價(還原), chg=當日漲跌幅%, r20/r60/r1=近20日/近60日/近一年報酬%(還原價計算), yield=近12月殖利率, size=規模億, k9=日K(9)
+// 28 檔 ETF：資料庫真實快照(2026/09/10 收盤)。px=現價(還原), chg=當日漲跌幅%, r20/r60/r1=近20日/近60日/近一年報酬%(還原價計算), yield=近12月殖利率, size=規模億, k9=日K(9)
 const DATA=[
- {cd:'0050',nm:'元大台灣50',type:'市值',region:'台灣',px:109.65,chg:0,r20:4.23,r60:4.82,r1:107.55,yield:1.46,size:24227.4,k9:82},
- {cd:'006208',nm:'富邦台50',type:'市值',region:'台灣',px:250.3,chg:0.1,r20:3.9,r60:4.55,r1:107.74,yield:3.28,size:4681.7,k9:80},
- {cd:'00692',nm:'富邦公司治理',type:'市值',region:'台灣',px:93.95,chg:0,r20:4.04,r60:5.38,r1:100.41,yield:3.38,size:578,k9:84},
- {cd:'00922',nm:'國泰台灣領袖50',type:'市值',region:'台灣',px:42.53,chg:-0.07,r20:4.78,r60:5.88,r1:106.36,yield:7.64,size:912.6,k9:81},
- {cd:'00850',nm:'元大臺灣ESG永續',type:'市值',region:'台灣',px:93.6,chg:-0.11,r20:4.42,r60:4.59,r1:101.9,yield:3.42,size:391.3,k9:81},
- {cd:'00923',nm:'群益台ESG低碳50',type:'市值',region:'台灣',px:40.58,chg:0.07,r20:3.65,r60:3.05,r1:107.68,yield:11.73,size:388.2,k9:79},
- {cd:'00888',nm:'永豐台灣ESG',type:'市值',region:'台灣',px:34.67,chg:0.87,r20:6.32,r60:3.62,r1:126.16,yield:11,size:null,k9:80},
- {cd:'009816',nm:'凱基台灣TOP50',type:'市值',region:'台灣',px:16.11,chg:-0.06,r20:5.57,r60:4.75,r1:null,yield:null,size:null,k9:87},
- {cd:'00646',nm:'元大S&P500',type:'市值',region:'國際',px:76.1,chg:-0.52,r20:-2.87,r60:2.15,r1:23.34,yield:null,size:480,k9:32},
- {cd:'00662',nm:'富邦NASDAQ',type:'市值',region:'國際',px:119.45,chg:-0.46,r20:-2.33,r60:-2.45,r1:28.93,yield:null,size:null,k9:62},
- {cd:'0056',nm:'元大高股息',type:'高息',region:'台灣',px:55.75,chg:0,r20:5.79,r60:11.26,r1:72.33,yield:7.32,size:7862.8,k9:87},
- {cd:'00878',nm:'國泰永續高股息',type:'高息',region:'台灣',px:34.13,chg:0.18,r20:4.95,r60:7.9,r1:80.49,yield:7.3,size:6437.9,k9:85},
- {cd:'00919',nm:'群益台灣精選高息',type:'高息',region:'台灣',px:32.58,chg:-0.4,r20:7.92,r60:9.73,r1:69.95,yield:8.78,size:6031.5,k9:80},
- {cd:'00929',nm:'復華台灣科技優息',type:'高息',region:'台灣',px:29.12,chg:0.8,r20:-0.07,r60:-1.05,r1:74.89,yield:5.6,size:1487.1,k9:55},
- {cd:'00713',nm:'元大台灣高息低波',type:'高息',region:'台灣',px:63.65,chg:0,r20:4,r60:6.85,r1:30.83,yield:5.25,size:1080,k9:93},
- {cd:'00940',nm:'元大台灣價值高息',type:'高息',region:'台灣',px:12.94,chg:0.94,r20:4.52,r60:5.37,r1:45.56,yield:4.1,size:669.1,k9:84},
- {cd:'00900',nm:'富邦特選高股息30',type:'高息',region:'台灣',px:19.58,chg:0.2,r20:3.82,r60:1.56,r1:55.89,yield:5.11,size:301.7,k9:81},
- {cd:'00939',nm:'統一台灣高息動能',type:'高息',region:'台灣',px:23.73,chg:-0.46,r20:7.23,r60:13.49,r1:81.15,yield:3.83,size:279,k9:88},
- {cd:'00915',nm:'凱基優選高股息30',type:'高息',region:'台灣',px:32.91,chg:0.46,r20:2.78,r60:6.13,r1:54.07,yield:4.47,size:null,k9:90},
- {cd:'00679B',nm:'元大美債20年',type:'債券',region:'國際',px:25.58,chg:-0.08,r20:-2.03,r60:-3.58,r1:-0.27,yield:4.38,size:1589.2,k9:18},
- {cd:'00687B',nm:'國泰20年美債',type:'債券',region:'國際',px:26.91,chg:-0.04,r20:-2,r60:-3.51,r1:-0.22,yield:4.17,size:1143.6,k9:19},
- {cd:'00757',nm:'統一FANG+',type:'科技',region:'國際',px:137.4,chg:-1.26,r20:-2.45,r60:7.18,r1:19.37,yield:null,size:null,k9:38},
- {cd:'0052',nm:'富邦科技',type:'科技',region:'台灣',px:63.75,chg:0.24,r20:3.66,r60:3.49,r1:115.74,yield:1.88,size:1635.2,k9:79},
- {cd:'00891',nm:'中信關鍵半導體',type:'科技',region:'台灣',px:35.82,chg:-0.17,r20:4.16,r60:3.53,r1:127.43,yield:11.59,size:688.2,k9:81},
- {cd:'00935',nm:'野村臺灣新科技50',type:'科技',region:'台灣',px:60,chg:0.25,r20:4.71,r60:-1.4,r1:147.83,yield:3.25,size:529.5,k9:79},
- {cd:'00927',nm:'群益半導體收益',type:'科技',region:'台灣',px:37.74,chg:0.35,r20:2.86,r60:-0.19,r1:130.26,yield:10.47,size:512.1,k9:77},
- {cd:'00892',nm:'富邦台灣半導體',type:'科技',region:'台灣',px:42.7,chg:-0.44,r20:4.17,r60:2.1,r1:145.83,yield:6.41,size:139.2,k9:84},
- {cd:'00735',nm:'國泰臺韓科技',type:'科技',region:'國際',px:107.05,chg:0,r20:6.52,r60:-2.53,r1:189.48,yield:3.74,size:127.5,k9:82},
+ {cd:'0050',nm:'元大台灣50',type:'市值',region:'台灣',px:109.15,chg:-0.46,r20:2.3,r60:3.7,r1:102.66,yield:1.47,size:24220.9,k9:79},
+ {cd:'006208',nm:'富邦台50',type:'市值',region:'台灣',px:249.55,chg:-0.3,r20:2.11,r60:3.71,r1:102.85,yield:3.29,size:4680.4,k9:76},
+ {cd:'00692',nm:'富邦公司治理',type:'市值',region:'台灣',px:93.45,chg:-0.53,r20:2.35,r60:4.13,r1:95.62,yield:3.39,size:577.4,k9:80},
+ {cd:'00922',nm:'國泰台灣領袖50',type:'市值',region:'台灣',px:42.36,chg:-0.4,r20:2.67,r60:4.64,r1:101.62,yield:7.67,size:912.8,k9:78},
+ {cd:'00850',nm:'元大臺灣ESG永續',type:'市值',region:'台灣',px:93.25,chg:-0.37,r20:2.51,r60:3.4,r1:97.69,yield:3.43,size:391.9,k9:77},
+ {cd:'00923',nm:'群益台ESG低碳50',type:'市值',region:'台灣',px:40.38,chg:-0.49,r20:1.13,r60:1.89,r1:103.94,yield:11.79,size:388.4,k9:76},
+ {cd:'00888',nm:'永豐台灣ESG',type:'市值',region:'台灣',px:34.6,chg:-0.2,r20:3.84,r60:2.55,r1:121.79,yield:11.02,size:224.6,k9:80},
+ {cd:'009816',nm:'凱基台灣TOP50',type:'市值',region:'台灣',px:16.03,chg:-0.5,r20:3.29,r60:3.35,r1:null,yield:null,size:null,k9:84},
+ {cd:'00646',nm:'元大S&P500',type:'市值',region:'國際',px:76,chg:-0.13,r20:-3.12,r60:1.47,r1:22.98,yield:null,size:478.1,k9:26},
+ {cd:'00662',nm:'富邦NASDAQ',type:'市值',region:'國際',px:119.2,chg:-0.21,r20:-3.05,r60:-3.75,r1:28.59,yield:null,size:null,k9:57},
+ {cd:'0056',nm:'元大高股息',type:'高息',region:'台灣',px:55.7,chg:-0.09,r20:5.09,r60:11.04,r1:70.18,yield:7.33,size:7869.4,k9:86},
+ {cd:'00878',nm:'國泰永續高股息',type:'高息',region:'台灣',px:34.15,chg:0.06,r20:4.21,r60:6.95,r1:79.55,yield:7.29,size:6451.9,k9:84},
+ {cd:'00919',nm:'群益台灣精選高息',type:'高息',region:'台灣',px:32.55,chg:-0.09,r20:7.04,r60:8.61,r1:69.35,yield:8.79,size:6046.5,k9:75},
+ {cd:'00929',nm:'復華台灣科技優息',type:'高息',region:'台灣',px:29,chg:-0.41,r20:-0.96,r60:-1.89,r1:73.03,yield:5.62,size:1501.3,k9:47},
+ {cd:'00713',nm:'元大台灣高息低波',type:'高息',region:'台灣',px:63.65,chg:0,r20:4.17,r60:6.49,r1:30.32,yield:5.25,size:1079.4,k9:92},
+ {cd:'00940',nm:'元大台灣價值高息',type:'高息',region:'台灣',px:12.85,chg:-0.7,r20:2.72,r60:5.24,r1:43.42,yield:4.12,size:673,k9:79},
+ {cd:'00900',nm:'富邦特選高股息30',type:'高息',region:'台灣',px:19.46,chg:-0.61,r20:3.18,r60:1.14,r1:54.44,yield:5.14,size:300.5,k9:76},
+ {cd:'00939',nm:'統一台灣高息動能',type:'高息',region:'台灣',px:23.74,chg:0.04,r20:6.6,r60:12.51,r1:80.26,yield:3.83,size:277.7,k9:85},
+ {cd:'00915',nm:'凱基優選高股息30',type:'高息',region:'台灣',px:32.82,chg:-0.27,r20:2.85,r60:4.66,r1:53.08,yield:4.48,size:null,k9:90},
+ {cd:'00679B',nm:'元大美債20年',type:'債券',region:'國際',px:25.43,chg:-0.59,r20:-2.45,r60:-3.64,r1:0.12,yield:4.4,size:1576.7,k9:14},
+ {cd:'00687B',nm:'國泰20年美債',type:'債券',region:'國際',px:26.75,chg:-0.59,r20:-2.48,r60:-3.57,r1:0.07,yield:4.19,size:1135.9,k9:14},
+ {cd:'00757',nm:'統一FANG+',type:'科技',region:'國際',px:137.85,chg:0.33,r20:-1.43,r60:5.23,r1:19.87,yield:null,size:null,k9:29},
+ {cd:'0052',nm:'富邦科技',type:'科技',region:'台灣',px:63.6,chg:-0.24,r20:1.92,r60:2.83,r1:110.95,yield:1.89,size:1636.5,k9:78},
+ {cd:'00891',nm:'中信關鍵半導體',type:'科技',region:'台灣',px:35.87,chg:0.14,r20:2.46,r60:2.34,r1:126.74,yield:11.57,size:682.9,k9:82},
+ {cd:'00935',nm:'野村臺灣新科技50',type:'科技',region:'台灣',px:59.7,chg:-0.5,r20:1.19,r60:-2.69,r1:141.02,yield:3.27,size:527.7,k9:77},
+ {cd:'00927',nm:'群益半導體收益',type:'科技',region:'台灣',px:37.72,chg:-0.05,r20:1.02,r60:-0.97,r1:128.74,yield:10.47,size:514.9,k9:78},
+ {cd:'00892',nm:'富邦台灣半導體',type:'科技',region:'台灣',px:42.42,chg:-0.66,r20:2.17,r60:-0.02,r1:143.09,yield:6.45,size:138.2,k9:82},
+ {cd:'00735',nm:'國泰臺韓科技',type:'科技',region:'國際',px:107,chg:-0.05,r20:3.28,r60:-3.3,r1:183.07,yield:3.74,size:129,k9:83},
 ];
 let holds={'0050':10,'0056':30,'00878':50,'2881':20,'2882':10};
-// 加權指數 MACD 市場時鐘（資料庫真實快照 2026/09/09；日柱=DIF-MACD、週柱=週DIF-週MACD，取 TWA00 加權指數）
-const TWMACD={day:129,dayPrev:129.9,week:-259.9,weekPrev:-262.4};
-const TWIDX={px:47183.36,chg:77.58,chgpct:0.16};
-const YTD={'0050':70.53,'006208':70.03,'00692':66.73,'00922':75.6,'00850':74.59,'00923':77.36,'00888':91.02,'00646':12.08,'00662':16.37,'0056':63.44,'00878':68.96,'00919':55.44,'00929':71.5,'00713':29.92,'00940':45.39,'00900':47.66,'00939':68.66,'00915':48.78,'00679B':-3.07,'00687B':-3.06,'00757':16.29,'0052':72.39,'00891':100.45,'00935':105.34,'00927':94.34,'00892':106.98,'00735':111.52};
+// 加權指數 MACD 市場時鐘（資料庫真實快照 2026/09/10；日柱=DIF-MACD、週柱=週DIF-週MACD，取 TWA00 加權指數）
+const TWMACD={day:94.7,dayPrev:129,week:-270,weekPrev:-259.9};
+const TWIDX={px:46940.49,chg:-242.87,chgpct:-0.51};
+const YTD={'0050':69.75,'006208':69.52,'00692':65.84,'00922':74.9,'00850':73.94,'00923':76.49,'00888':90.63,'00646':11.93,'00662':16.12,'0056':63.3,'00878':69.06,'00919':55.3,'00929':70.79,'00713':29.92,'00940':44.38,'00900':46.76,'00939':68.73,'00915':48.37,'00679B':-3.64,'00687B':-3.64,'00757':16.67,'0052':71.98,'00891':100.73,'00935':104.31,'00927':94.23,'00892':105.62,'00735':111.42};
 const MOMO_TYPES=['市值','科技'];
 const MODEDEF={
  short:{name:'短週期',icon:'🔥',cond:'週MACD 剛翻紅（第一根紅柱）',say:'大趨勢剛醒來，動能最強，衝進去搭順風車。',sort:'ytd'},
@@ -247,7 +247,7 @@ const MODEDEF={
  long:{name:'長週期',icon:'🐢',cond:'週MACD 剛翻綠（第一根綠柱）',say:'長線開始往下走，適合存好幾年的人分批撿便宜。',sort:'size'},
 };
 // 雷達狀態（週/月/年 三週期計分；保護機制由前端套用）
-const RADAR={"0050":{"w":{"st":"NORMAL","wp":0,"r10":3.5,"b20":3.1,"rsi":62.1},"m":{"st":"CHEAP","mp":0,"dd60":-0.8,"b60":4.7},"y":{"st":"HOT","dd52":-0.8,"b240":34.7}},"006208":{"w":{"st":"NORMAL","wp":0,"r10":3.1,"b20":2.7,"rsi":60.8},"m":{"st":"CHEAP","mp":0,"dd60":-0.9,"b60":4.3},"y":{"st":"HOT","dd52":-0.9,"b240":34.5}},"00692":{"w":{"st":"NORMAL","wp":0,"r10":3.2,"b20":3.0,"rsi":62.2},"m":{"st":"CHEAP","mp":0,"dd60":-0.4,"b60":4.8},"y":{"st":"HOT","dd52":-0.4,"b240":33.5}},"00922":{"w":{"st":"NORMAL","wp":0,"r10":3.7,"b20":3.0,"rsi":61.7},"m":{"st":"CHEAP","mp":0,"dd60":-0.7,"b60":5.3},"y":{"st":"HOT","dd52":-0.7,"b240":37.7}},"00850":{"w":{"st":"NORMAL","wp":0,"r10":3.5,"b20":2.9,"rsi":62.1},"m":{"st":"CHEAP","mp":0,"dd60":-0.7,"b60":5.2},"y":{"st":"HOT","dd52":-0.7,"b240":37.1}},"00923":{"w":{"st":"NORMAL","wp":0,"r10":3.3,"b20":2.6,"rsi":60.4},"m":{"st":"CHEAP","mp":0,"dd60":-2.1,"b60":4.4},"y":{"st":"HOT","dd52":-2.1,"b240":37.0}},"00888":{"w":{"st":"NORMAL","wp":0,"r10":5.2,"b20":4.3,"rsi":60.5},"m":{"st":"CHEAP","mp":0,"dd60":-5.7,"b60":3.5},"y":{"st":"HOT","dd52":-5.7,"b240":42.6}},"009816":{"w":{"st":"NORMAL","wp":0,"r10":4.4,"b20":3.5,"rsi":64.8},"m":{"st":"CHEAP","mp":0,"dd60":-0.4,"b60":5.7},"y":{"st":"HOT","dd52":null,"b240":null}},"00646":{"w":{"st":"ALERT","wp":1,"r10":-1.1,"b20":-1.3,"rsi":42.7},"m":{"st":"CHEAP","mp":0,"dd60":-3.6,"b60":-0.2},"y":{"st":"NORMAL","dd52":-3.6,"b240":8.6}},"00662":{"w":{"st":"NORMAL","wp":2,"r10":0.0,"b20":-0.7,"rsi":46.7},"m":{"st":"NORMAL","mp":0,"dd60":-3.6,"b60":-1.0},"y":{"st":"NORMAL","dd52":-3.6,"b240":10.2}},"00757":{"w":{"st":"NORMAL","wp":0,"r10":0.1,"b20":-0.9,"rsi":49.1},"m":{"st":"NORMAL","mp":0,"dd60":-3.4,"b60":2.7},"y":{"st":"NORMAL","dd52":-3.4,"b240":12.4}},"0052":{"w":{"st":"NORMAL","wp":0,"r10":2.9,"b20":2.9,"rsi":61.1},"m":{"st":"CHEAP","mp":0,"dd60":-2.3,"b60":3.9},"y":{"st":"HOT","dd52":-2.3,"b240":34.8}},"00891":{"w":{"st":"NORMAL","wp":0,"r10":4.2,"b20":3.8,"rsi":61.4},"m":{"st":"CHEAP","mp":0,"dd60":-4.3,"b60":4.8},"y":{"st":"HOT","dd52":-4.3,"b240":43.8}},"00935":{"w":{"st":"NORMAL","wp":0,"r10":5.3,"b20":3.8,"rsi":59.1},"m":{"st":"CHEAP","mp":0,"dd60":-6.5,"b60":4.1},"y":{"st":"HOT","dd52":-6.5,"b240":43.2}},"00927":{"w":{"st":"NORMAL","wp":0,"r10":3.8,"b20":3.5,"rsi":57.7},"m":{"st":"CHEAP","mp":0,"dd60":-9.2,"b60":1.5},"y":{"st":"HOT","dd52":-9.2,"b240":41.2}},"00892":{"w":{"st":"NORMAL","wp":0,"r10":7.5,"b20":5.7,"rsi":63.3},"m":{"st":"CHEAP","mp":0,"dd60":-4.6,"b60":5.3},"y":{"st":"HOT","dd52":-4.6,"b240":43.8}},"00735":{"w":{"st":"NORMAL","wp":1,"r10":4.3,"b20":3.8,"rsi":59.5},"m":{"st":"CHEAP","mp":0,"dd60":-10.2,"b60":4.2},"y":{"st":"HOT","dd52":-10.2,"b240":46.4}}};
+const RADAR={"0050":{"w":{"st":"NORMAL","wp":0,"r10":2.9,"b20":2.5,"rsi":60.1},"m":{"st":"CHEAP","mp":0,"dd60":-1.2,"b60":4.1},"y":{"st":"HOT","dd52":-1.2,"b240":33.8}},"006208":{"w":{"st":"NORMAL","wp":0,"r10":2.6,"b20":2.3,"rsi":59.5},"m":{"st":"CHEAP","mp":0,"dd60":-1.2,"b60":4.0},"y":{"st":"HOT","dd52":-1.2,"b240":33.7}},"00692":{"w":{"st":"NORMAL","wp":0,"r10":2.5,"b20":2.3,"rsi":59.8},"m":{"st":"CHEAP","mp":0,"dd60":-0.9,"b60":4.2},"y":{"st":"HOT","dd52":-0.9,"b240":32.4}},"00922":{"w":{"st":"NORMAL","wp":0,"r10":3.2,"b20":2.5,"rsi":60.1},"m":{"st":"CHEAP","mp":0,"dd60":-1.1,"b60":4.8},"y":{"st":"HOT","dd52":-1.1,"b240":36.7}},"00850":{"w":{"st":"NORMAL","wp":0,"r10":3.0,"b20":2.4,"rsi":60.4},"m":{"st":"CHEAP","mp":0,"dd60":-1.1,"b60":4.8},"y":{"st":"HOT","dd52":-1.1,"b240":36.2}},"00923":{"w":{"st":"NORMAL","wp":0,"r10":2.5,"b20":2.0,"rsi":58.4},"m":{"st":"CHEAP","mp":0,"dd60":-2.6,"b60":3.8},"y":{"st":"HOT","dd52":-2.6,"b240":35.9}},"00888":{"w":{"st":"NORMAL","wp":0,"r10":5.1,"b20":3.9,"rsi":59.9},"m":{"st":"CHEAP","mp":0,"dd60":-5.9,"b60":3.2},"y":{"st":"HOT","dd52":-5.9,"b240":41.9}},"009816":{"w":{"st":"NORMAL","wp":0,"r10":3.7,"b20":2.9,"rsi":62.4},"m":{"st":"CHEAP","mp":0,"dd60":-0.9,"b60":5.2},"y":{"st":"HOT","dd52":null,"b240":null}},"00646":{"w":{"st":"ALERT","wp":1,"r10":-1.2,"b20":-1.2,"rsi":41.9},"m":{"st":"CHEAP","mp":0,"dd60":-3.7,"b60":-0.4},"y":{"st":"NORMAL","dd52":-3.7,"b240":8.4}},"00662":{"w":{"st":"NORMAL","wp":2,"r10":-0.5,"b20":-0.8,"rsi":45.5},"m":{"st":"NORMAL","mp":0,"dd60":-3.6,"b60":-1.1},"y":{"st":"NORMAL","dd52":-3.8,"b240":9.9}},"00757":{"w":{"st":"NORMAL","wp":0,"r10":-0.1,"b20":-0.5,"rsi":50.4},"m":{"st":"NORMAL","mp":0,"dd60":-3.1,"b60":2.9},"y":{"st":"NORMAL","dd52":-3.1,"b240":12.7}},"0052":{"w":{"st":"NORMAL","wp":0,"r10":2.7,"b20":2.6,"rsi":60.1},"m":{"st":"CHEAP","mp":0,"dd60":-2.5,"b60":3.6},"y":{"st":"HOT","dd52":-2.5,"b240":34.1}},"00891":{"w":{"st":"NORMAL","wp":0,"r10":4.7,"b20":3.8,"rsi":61.7},"m":{"st":"CHEAP","mp":0,"dd60":-4.2,"b60":4.9},"y":{"st":"HOT","dd52":-4.2,"b240":43.5}},"00935":{"w":{"st":"NORMAL","wp":0,"r10":4.4,"b20":3.2,"rsi":57.7},"m":{"st":"CHEAP","mp":0,"dd60":-7.0,"b60":3.6},"y":{"st":"HOT","dd52":-7.0,"b240":41.9}},"00927":{"w":{"st":"NORMAL","wp":0,"r10":4.1,"b20":3.4,"rsi":57.6},"m":{"st":"CHEAP","mp":0,"dd60":-9.2,"b60":1.5},"y":{"st":"HOT","dd52":-9.2,"b240":40.6}},"00892":{"w":{"st":"NORMAL","wp":0,"r10":6.0,"b20":4.8,"rsi":61.2},"m":{"st":"CHEAP","mp":0,"dd60":-5.3,"b60":4.6},"y":{"st":"HOT","dd52":-5.3,"b240":42.4}},"00735":{"w":{"st":"NORMAL","wp":1,"r10":3.6,"b20":3.5,"rsi":59.4},"m":{"st":"CHEAP","mp":0,"dd60":-10.2,"b60":4.2},"y":{"st":"HOT","dd52":-10.2,"b240":45.8}}};
 const RSTATUS={CHEAP:['便宜','var(--g0)','#fff'],NORMAL:['普通','#eef4f9','var(--sub)'],HOT:['過熱','var(--r2c)','#fff'],ALERT:['修正警戒','var(--sun)','#5a4500'],MAJOR:['大修正中','var(--brandD)','#fff'],PROT:['🛡 保護中','var(--sky1)','#fff'],COOL:['❄ 冷卻中','#dceaf4','#3d5366']};
 const RDESC={
  w:{CHEAP:'短線跌深，且下跌力道開始放緩。',NORMAL:'短線沒有明顯便宜，也沒有明顯過熱。',HOT:'短線漲幅偏高，追價風險上升。',ALERT:'價格雖然跌深，但下跌力道仍在擴大。',PROT:'短線雖跌深，但上層週期風險升高，已暫停週級別便宜訊號。',COOL:'已完成參與標記，暫停連續提示，避免短時間反覆追同一訊號。'},
@@ -386,19 +386,19 @@ function openHelp(){
 }
 function closeHelp(){document.getElementById('hmodal').classList.remove('open');}
 
-// 穩定金融股池（近12月實際配息／2026/09/09 現價；殖利率=近一年現金股利/現價，連配年數沿用）
+// 穩定金融股池（近12月實際配息／2026/09/10 現價；殖利率=近一年現金股利/現價，連配年數沿用）
 const FIN=[
- {cd:'2892',nm:'第一金',px:37.8,yield:3.44,yrs:22},
- {cd:'2884',nm:'玉山金',px:44.25,yield:3.16,yrs:17},
- {cd:'2886',nm:'兆豐金',px:50.3,yield:3.48,yrs:24},
- {cd:'2880',nm:'華南金',px:44.35,yield:3.04,yrs:23},
+ {cd:'2892',nm:'第一金',px:38,yield:3.42,yrs:22},
+ {cd:'2884',nm:'玉山金',px:44.95,yield:3.11,yrs:17},
+ {cd:'2886',nm:'兆豐金',px:49.9,yield:3.51,yrs:24},
+ {cd:'2880',nm:'華南金',px:44.8,yield:3.01,yrs:23},
  {cd:'2801',nm:'彰銀',px:26.85,yield:2.98,yrs:20},
- {cd:'2891',nm:'中信金',px:66.6,yield:3.75,yrs:19},
+ {cd:'2891',nm:'中信金',px:67.3,yield:3.71,yrs:19},
  {cd:'5880',nm:'合庫金',px:26.85,yield:2.98,yrs:23},
- {cd:'2881',nm:'富邦金',px:147,yield:2.89,yrs:17},
- {cd:'2887',nm:'台新金',px:42.4,yield:2.36,yrs:16},
+ {cd:'2881',nm:'富邦金',px:148.5,yield:2.86,yrs:17},
+ {cd:'2887',nm:'台新金',px:42.15,yield:2.37,yrs:16},
  {cd:'2882',nm:'國泰金',px:110.5,yield:3.17,yrs:17},
- {cd:'2890',nm:'永豐金',px:43.2,yield:2.55,yrs:17},
+ {cd:'2890',nm:'永豐金',px:42.9,yield:2.56,yrs:17},
  {cd:'2885',nm:'元大金',px:69.7,yield:2.58,yrs:15},
 ];
 let dreamMonths=36, dreamFilled=0, dreamIncV=10000;
@@ -445,11 +445,11 @@ function dreamStep(){ if(dreamFilled<dreamMonths){dreamFilled++;renderProgress()
 
 // 功能3：個股低檔評價（營收創歷史新高+量≥1億+日K低檔，近日真實快照）
 const CHEAP=[
- {cd:'6739',nm:'竹陞科技',px:1200,chg:4.8,k9:76,bias:11.7,pe:38.1,cash:13,maxY:2.28},
- {cd:'3706',nm:'神達',px:81.8,chg:1.91,k9:35,bias:3.3,pe:14.5,cash:3,maxY:6.3},
- {cd:'6285',nm:'啟碁',px:233.5,chg:-1.06,k9:24,bias:-4.9,pe:18.8,cash:4.302,maxY:4.03},
- {cd:'6907',nm:'雅特力-KY',px:195.5,chg:-4.17,k9:65,bias:8,pe:21.8,cash:0.994,maxY:0.7},
- {cd:'3167',nm:'大量',px:900,chg:-4.05,k9:79,bias:21.9,pe:34.6,cash:3.915,maxY:7.07},
+ {cd:'6739',nm:'竹陞科技',px:1320,chg:10,k9:84,bias:22.6,pe:40.9,cash:13,maxY:2.28},
+ {cd:'3706',nm:'神達',px:82,chg:0.24,k9:39,bias:3.4,pe:14.6,cash:3,maxY:6.3},
+ {cd:'6285',nm:'啟碁',px:227,chg:-2.78,k9:17,bias:-7.3,pe:18.2,cash:4.302,maxY:4.03},
+ {cd:'6907',nm:'雅特力-KY',px:190,chg:-2.81,k9:59,bias:4.4,pe:21.2,cash:0.994,maxY:0.7},
+ {cd:'3167',nm:'大量',px:848,chg:-5.78,k9:70,bias:14.8,pe:32.6,cash:3.915,maxY:7.07},
 ];
 function cheapEval(d){
   const yNow=d.cash/d.px*100, isDiv=yNow>=3;
@@ -496,7 +496,7 @@ function openCheap(cd){
 }
 
 // 功能4：持股股利行事曆
-const TODAY='20260909';
+const TODAY='20260910';
 const DIVDATES={'00687B':['20260916','20261015'],'00713':['20260921','20261013'],'00915':['20260916','20261015'],'00919':['20260916','20261015'],'00935':['20260916','20261015']};
 const ETF_MONTH=['00878','00919','00929','00940','00939'], ETF_HALF=['0050','006208','00646','00662'];
 function freqOf(cd,kind){ if(kind!=='ETF')return '年配'; if(ETF_MONTH.includes(cd))return '月配'; if(ETF_HALF.includes(cd))return '半年配'; return '季配'; }
@@ -528,29 +528,29 @@ function renderWatch(){
       <button onclick="removeHold('${e.cd}')" style="background:none;border:0;color:var(--sub);font-size:18px;align-self:flex-start">✕</button>
     </div>`).join('')||'<div class="vsub">尚未加入持股，用上方選單加入。</div>';
 }
-// 功能5：世界盃ETF（美股ETF淨值表 前20大，依基金淨資產；資料日 2026/09/08）
-const US_LATEST='20260908';
+// 功能5：世界盃ETF（美股ETF淨值表 前20大，依基金淨資產；資料日 2026/09/09）
+const US_LATEST='20260909';
 const USETF=[
- {cd:'VOO',nm:'Vanguard S&P 500 ETF',nav:704.01,chg:-4.11,chgpct:-0.58},
- {cd:'IVV',nm:'iShares Core S&P 500 ETF',nav:769.53,chg:-4.5,chgpct:-0.58},
- {cd:'VTI',nm:'Vanguard Morningstar Total Stock Market ETF',nav:377.55,chg:-2.21,chgpct:-0.58},
- {cd:'QQQ',nm:'Invesco QQQ Trust Series I',nav:718.29,chg:-0.9,chgpct:-0.12},
- {cd:'VEA',nm:'Vanguard FTSE Developed Markets ETF',nav:73.48,chg:-0.14,chgpct:-0.19},
- {cd:'VUG',nm:'Vanguard Morningstar Growth ETF',nav:88.11,chg:-0.34,chgpct:-0.38},
- {cd:'IEFA',nm:'iShares Core MSCI EAFE ETF',nav:100.41,chg:-0.41,chgpct:-0.41},
- {cd:'VTV',nm:'Vanguard Morningstar Value ETF',nav:224.58,chg:-1.9,chgpct:-0.84},
- {cd:'VXUS',nm:'Vanguard Total International Stock ETF',nav:87.99,chg:-0.12,chgpct:-0.14},
- {cd:'IEMG',nm:'iShares Core MSCI Emerging Markets ETF',nav:83.57,chg:0.47,chgpct:0.56},
- {cd:'BND',nm:'Vanguard Total Bond Market ETF',nav:71.88,chg:-0.02,chgpct:-0.03},
- {cd:'GLD',nm:'SPDR Gold Shares',nav:403.4,chg:-1.51,chgpct:-0.37},
- {cd:'VGT',nm:'Vanguard Information Technology ETF',nav:121.04,chg:-0.22,chgpct:-0.18},
- {cd:'VWO',nm:'Vanguard FTSE Emerging Markets ETF',nav:61.21,chg:0.01,chgpct:0.02},
- {cd:'IWF',nm:'iShares Russell 1000 Growth ETF',nav:123.01,chg:-0.44,chgpct:-0.35},
- {cd:'IJH',nm:'iShares Core S&P Mid-Cap ETF',nav:75.34,chg:-0.52,chgpct:-0.69},
- {cd:'VIG',nm:'Vanguard Dividend Appreciation ETF',nav:240.09,chg:-1.98,chgpct:-0.82},
- {cd:'IJR',nm:'iShares Core S&P Small Cap ETF',nav:144.15,chg:-1.23,chgpct:-0.85},
- {cd:'SGOV',nm:'iShares 0-3 Month Treasury Bond ETF',nav:100.47,chg:0.01,chgpct:0.01},
- {cd:'VO',nm:'Vanguard Morningstar Mid-Cap ETF',nav:81.77,chg:-0.53,chgpct:-0.64},
+ {cd:'VOO',nm:'Vanguard S&P 500 ETF',nav:700.62,chg:-3.39,chgpct:-0.48},
+ {cd:'IVV',nm:'iShares Core S&P 500 ETF',nav:765.83,chg:-3.7,chgpct:-0.48},
+ {cd:'VTI',nm:'Vanguard Morningstar Total Stock Market ETF',nav:375.49,chg:-2.06,chgpct:-0.55},
+ {cd:'QQQ',nm:'Invesco QQQ Trust Series I',nav:716.18,chg:-2.1,chgpct:-0.29},
+ {cd:'VEA',nm:'Vanguard FTSE Developed Markets ETF',nav:72.91,chg:-0.57,chgpct:-0.78},
+ {cd:'VUG',nm:'Vanguard Morningstar Growth ETF',nav:87.65,chg:-0.46,chgpct:-0.52},
+ {cd:'IEFA',nm:'iShares Core MSCI EAFE ETF',nav:99.46,chg:-0.95,chgpct:-0.95},
+ {cd:'VTV',nm:'Vanguard Morningstar Value ETF',nav:223.86,chg:-0.72,chgpct:-0.32},
+ {cd:'VXUS',nm:'Vanguard Total International Stock ETF',nav:87.35,chg:-0.64,chgpct:-0.73},
+ {cd:'IEMG',nm:'iShares Core MSCI Emerging Markets ETF',nav:83.25,chg:-0.32,chgpct:-0.38},
+ {cd:'BND',nm:'Vanguard Total Bond Market ETF',nav:71.72,chg:-0.16,chgpct:-0.22},
+ {cd:'GLD',nm:'SPDR Gold Shares',nav:404.85,chg:1.45,chgpct:0.36},
+ {cd:'VGT',nm:'Vanguard Information Technology ETF',nav:120.86,chg:-0.18,chgpct:-0.15},
+ {cd:'VWO',nm:'Vanguard FTSE Emerging Markets ETF',nav:60.84,chg:-0.37,chgpct:-0.6},
+ {cd:'IWF',nm:'iShares Russell 1000 Growth ETF',nav:122.45,chg:-0.56,chgpct:-0.45},
+ {cd:'IJH',nm:'iShares Core S&P Mid-Cap ETF',nav:74.53,chg:-0.81,chgpct:-1.07},
+ {cd:'VIG',nm:'Vanguard Dividend Appreciation ETF',nav:238.8,chg:-1.29,chgpct:-0.54},
+ {cd:'SCHD',nm:'Schwab US Dividend Equity ETF',nav:34.07,chg:-0.31,chgpct:-0.9},
+ {cd:'SGOV',nm:'iShares 0-3 Month Treasury Bond ETF',nav:100.48,chg:0.01,chgpct:0.01},
+ {cd:'IJR',nm:'iShares Core S&P Small Cap ETF',nav:142.68,chg:-1.47,chgpct:-1.02},
 ];
 function renderWorld(){
   document.getElementById('worldList').innerHTML=USETF.map((d,i)=>{
